@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Feature Selection Mind Map</title>
+  <title>Dimensionality Reduction Mind Map</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -18,7 +18,7 @@
     .mindmap {
       position: relative;
       width: 1200px;
-      height: 850px;
+      height: 800px;
       margin: 20px 0;
       background-color: white;
       border-radius: 10px;
@@ -27,13 +27,13 @@
     }
     .node {
       position: absolute;
-      padding: 10px;
+      padding: 12px;
       border-radius: 8px;
       cursor: pointer;
-      text-align: center;
-      transition: transform 0.3s ease;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       font-weight: bold;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     .node:hover {
       transform: scale(1.05);
@@ -78,7 +78,23 @@
     .infoContent {
       line-height: 1.5;
     }
-    svg line {
+    /* Legend styles */
+    .legend {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+    }
+    .legendItem {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .legendBox {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+    }
+    line {
       stroke: #999;
       stroke-width: 2;
     }
@@ -86,76 +102,148 @@
 </head>
 <body>
   <div class="container">
-    <h1>Feature Selection in Dimensionality Reduction</h1>
+    <h1>Dimensionality Reduction</h1>
     <div class="mindmap" id="mindmap">
       <!-- SVG for connecting lines -->
-      <svg width="1200" height="850" style="position: absolute; top: 0; left: 0;">
-        <!-- Main branches -->
-        <line x1="600" y1="400" x2="200" y2="150" />
-        <line x1="600" y1="400" x2="1000" y2="150" />
-        <line x1="600" y1="400" x2="200" y2="700" />
-        <line x1="600" y1="400" x2="1000" y2="700" />
+      <svg width="1200" height="800" style="position: absolute; top: 0; left: 0;">
+        <!-- Lines from central red node to each blue node -->
+        <!-- Central node center: (600, 375) from left:500, top:350, width:200, height ~50 -->
+        <line x1="600" y1="375" x2="225" y2="75" />      <!-- To Blue Node 1: Feature Selection -->
+        <line x1="600" y1="375" x2="975" y2="75" />      <!-- To Blue Node 2: Feature Extraction -->
+        <line x1="600" y1="375" x2="1110" y2="375" />     <!-- To Blue Node 3: Curse & Visualization -->
+        <line x1="600" y1="375" x2="975" y2="675" />      <!-- To Blue Node 4: Random Projection -->
+        <line x1="600" y1="375" x2="225" y2="675" />      <!-- To Blue Node 5: Factor Analysis -->
         
-        <!-- Sub-branches -->
-        <line x1="200" y1="150" x2="80" y2="60" />
-        <line x1="200" y1="150" x2="80" y2="230" />
-        <line x1="1000" y1="150" x2="920" y2="60" />
-        <line x1="1000" y1="150" x2="1080" y2="60" />
-        <line x1="1000" y1="150" x2="1000" y2="230" />
-        <line x1="200" y1="700" x2="80" y2="620" />
-        <line x1="200" y1="700" x2="80" y2="780" />
-        <line x1="1000" y1="700" x2="920" y2="620" />
-        <line x1="1000" y1="700" x2="1080" y2="620" />
+        <!-- Lines connecting Blue Node 1 to its green nodes -->
+        <line x1="225" y1="75" x2="210" y2="125" />
+        <line x1="225" y1="75" x2="210" y2="185" />
+        <line x1="225" y1="75" x2="210" y2="245" />
+        
+        <!-- Lines connecting Blue Node 2 to its green nodes -->
+        <line x1="975" y1="75" x2="975" y2="125" />
+        <line x1="975" y1="75" x2="975" y2="185" />
+        
+        <!-- Lines connecting Blue Node 3 to its green nodes (placed to left of Blue Node 3) -->
+        <line x1="1110" y1="375" x2="950" y2="375" />
+        <line x1="1110" y1="375" x2="950" y2="435" />
+        
+        <!-- Lines connecting Blue Node 4 to its green nodes -->
+        <line x1="975" y1="675" x2="975" y2="725" />
+        <line x1="975" y1="675" x2="975" y2="785" />
+        
+        <!-- Lines connecting Blue Node 5 to its green nodes -->
+        <line x1="225" y1="675" x2="210" y2="725" />
+        <line x1="225" y1="675" x2="210" y2="785" />
       </svg>
       
-      <!-- Central Node -->
-      <div class="node red" style="width: 250px; top: 380px; left: 475px;"
-           onclick="showInfo('Feature Selection', '<ul><li>Process of selecting the most relevant features to improve model performance and interpretability.</li></ul>')">
+      <!-- Central Red Node -->
+      <div class="node red" style="width: 200px; top: 350px; left: 500px;" 
+           onclick="showInfo('Dimensionality Reduction', '&lt;ul&gt;&lt;li&gt;Techniques to reduce the number of variables while preserving essential information.&lt;/li&gt;&lt;li&gt;Includes both feature selection and feature extraction methods.&lt;/li&gt;&lt;/ul&gt;')">
+        Dimensionality Reduction
+      </div>
+      
+      <!-- Blue Node 1: Feature Selection -->
+      <div class="node blue" style="width: 250px; top: 50px; left: 100px;" 
+           onclick="showInfo('Feature Selection', '&lt;ul&gt;&lt;li&gt;Methods to choose a subset of relevant features.&lt;/li&gt;&lt;li&gt;Key approaches: Filter, Wrapper, Embedded.&lt;/li&gt;&lt;/ul&gt;')">
         Feature Selection
       </div>
-      
-      <!-- Blue Nodes (Main Topics) -->
-      <div class="node blue" style="width: 250px; top: 120px; left: 120px;"
-           onclick="showInfo('Selection Methods', '<ul><li>Filter, Wrapper, and Embedded Methods.</li></ul>')">
-        Selection Methods
+      <!-- Green Nodes for Feature Selection -->
+      <div class="node green" style="width: 220px; top: 110px; left: 100px;" 
+           onclick="showInfo('Selection Methods', '&lt;ul&gt;&lt;li&gt;Filter: Statistical scores (e.g. correlation, mutual information).&lt;/li&gt;&lt;li&gt;Wrapper: Use models (recursive elimination, forward/backward selection).&lt;/li&gt;&lt;li&gt;Embedded: Feature selection during model training (e.g. L1 regularization).&lt;/li&gt;&lt;/ul&gt;')">
+        Selection Methods<br>(Filter, Wrapper, Embedded)
       </div>
-      <div class="node blue" style="width: 250px; top: 120px; left: 880px;"
-           onclick="showInfo('Correlation & Pearson', '<ul><li>Measuring relationships between features.</li></ul>')">
-        Correlation & Pearson
+      <div class="node green" style="width: 220px; top: 170px; left: 100px;" 
+           onclick="showInfo('Correlation &amp; Pearson', '&lt;ul&gt;&lt;li&gt;Pearson correlation measures linear relationships (range -1 to 1).&lt;/li&gt;&lt;li&gt;Used to assess feature relevance and redundancy.&lt;/li&gt;&lt;/ul&gt;')">
+        Correlation &amp; Pearson
       </div>
-      <div class="node blue" style="width: 250px; top: 680px; left: 120px;"
-           onclick="showInfo('Simpson’s Paradox', '<ul><li>Explains misleading statistical conclusions.</li></ul>')">
-        Simpson’s Paradox
-      </div>
-      <div class="node blue" style="width: 250px; top: 680px; left: 880px;"
-           onclick="showInfo('Applications & Case Studies', '<ul><li>Real-world uses in health, psychology, and economics.</li></ul>')">
-        Applications & Case Studies
+      <div class="node green" style="width: 220px; top: 230px; left: 100px;" 
+           onclick="showInfo('Simpson’s Paradox &amp; Case Study', '&lt;ul&gt;&lt;li&gt;Illustrates that aggregated data can be misleading.&lt;/li&gt;&lt;li&gt;Example: UC Berkeley Admissions.&lt;/li&gt;&lt;/ul&gt;')">
+        Simpson’s Paradox<br>&amp; Case Study
       </div>
       
-      <!-- Green Nodes (Details) -->
-      <div class="node green" style="width: 200px; top: 50px; left: 60px;"
-           onclick="showInfo('Filter Methods', '<ul><li>Use statistical scores (correlation, mutual information).</li></ul>')">
-        Filter Methods
+      <!-- Blue Node 2: Feature Extraction -->
+      <div class="node blue" style="width: 250px; top: 50px; left: 850px;" 
+           onclick="showInfo('Feature Extraction', '&lt;ul&gt;&lt;li&gt;Techniques that transform data into a lower-dimensional space.&lt;/li&gt;&lt;li&gt;Includes PCA, t-SNE, SVD, and Autoencoders.&lt;/li&gt;&lt;/ul&gt;')">
+        Feature Extraction
       </div>
-      <div class="node green" style="width: 200px; top: 200px; left: 60px;"
-           onclick="showInfo('Wrapper Methods', '<ul><li>Evaluate feature subsets using predictive models.</li></ul>')">
-        Wrapper Methods
+      <!-- Green Nodes for Feature Extraction -->
+      <div class="node green" style="width: 220px; top: 110px; left: 850px;" 
+           onclick="showInfo('PCA', '&lt;ul&gt;&lt;li&gt;Principal Component Analysis: Projects data onto principal components.&lt;/li&gt;&lt;li&gt;Steps: Standardization, Covariance Matrix, Eigenvalue Decomposition, Projection.&lt;/li&gt;&lt;/ul&gt;')">
+        PCA: Projection &amp; Benefits
       </div>
-      <div class="node green" style="width: 200px; top: 50px; left: 1080px;"
-           onclick="showInfo('Pearson Correlation', '<ul><li>Measures linear relationship (-1 to +1 scale).</li></ul>')">
-        Pearson Correlation
+      <div class="node green" style="width: 220px; top: 170px; left: 850px;" 
+           onclick="showInfo('t-SNE', '&lt;ul&gt;&lt;li&gt;t-SNE: Nonlinear technique that preserves local similarities.&lt;/li&gt;&lt;li&gt;Uses KL divergence minimization and perplexity to map high-D data to 2D/3D.&lt;/li&gt;&lt;/ul&gt;')">
+        t-SNE: Nonlinear Mapping
       </div>
-      <div class="node green" style="width: 200px; top: 200px; left: 1080px;"
-           onclick="showInfo('Causation vs Correlation', '<ul><li>Example: Ice cream sales and shark attacks.</li></ul>')">
-        Causation vs Correlation
+      
+      <!-- Blue Node 3: Curse of Dimensionality & Visualization -->
+      <div class="node blue" style="width: 220px; top: 350px; left: 1000px;" 
+           onclick="showInfo('Curse of Dimensionality &amp; Visualization', '&lt;ul&gt;&lt;li&gt;Curse of Dimensionality: As dimensions increase, data becomes sparse.&lt;/li&gt;&lt;li&gt;Visualization: Essential for uncovering structure and outliers in data.&lt;/li&gt;&lt;/ul&gt;')">
+        Curse of Dim. &amp; Visualization
       </div>
+      <!-- Green Nodes for Curse of Dim. & Visualization (placed to the left of Blue Node 3) -->
+      <div class="node green" style="width: 200px; top: 350px; left: 950px;" 
+           onclick="showInfo('Curse of Dimensionality', '&lt;ul&gt;&lt;li&gt;High-dimensional spaces suffer from sparse data distribution (e.g., low maximum distances, high kissing numbers).&lt;/li&gt;&lt;/ul&gt;')">
+        Curse of Dimensionality
+      </div>
+      <div class="node green" style="width: 200px; top: 410px; left: 950px;" 
+           onclick="showInfo('Visualization', '&lt;ul&gt;&lt;li&gt;Visualization techniques help reveal clusters, outliers, and structure in lower-dimensional representations.&lt;/li&gt;&lt;/ul&gt;')">
+        Visualization
+      </div>
+      
+      <!-- Blue Node 4: Random Projection -->
+      <div class="node blue" style="width: 250px; top: 650px; left: 850px;" 
+           onclick="showInfo('Random Projection', '&lt;ul&gt;&lt;li&gt;Projects data into a lower-dimensional space using random linear projections.&lt;/li&gt;&lt;li&gt;Often faster than other methods while approximately preserving distances.&lt;/li&gt;&lt;/ul&gt;')">
+        Random Projection
+      </div>
+      <!-- Green Nodes for Random Projection -->
+      <div class="node green" style="width: 220px; top: 710px; left: 850px;" 
+           onclick="showInfo('Random Projection Method', '&lt;ul&gt;&lt;li&gt;Uses random matrices to reduce dimensions.&lt;/li&gt;&lt;/ul&gt;')">
+        Random Projection Method
+      </div>
+      <div class="node green" style="width: 220px; top: 770px; left: 850px;" 
+           onclick="showInfo('Johnson-Lindenstrauss Lemma', '&lt;ul&gt;&lt;li&gt;Guarantees distance preservation with high probability when projecting into k dimensions.&lt;/li&gt;&lt;/ul&gt;')">
+        Johnson-Lindenstrauss Lemma
+      </div>
+      
+      <!-- Blue Node 5: Factor Analysis -->
+      <div class="node blue" style="width: 250px; top: 650px; left: 100px;" 
+           onclick="showInfo('Factor Analysis', '&lt;ul&gt;&lt;li&gt;Extracts latent factors that explain correlations among observed variables.&lt;/li&gt;&lt;li&gt;Used mainly for feature extraction; interpretation can be subjective.&lt;/li&gt;&lt;/ul&gt;')">
+        Factor Analysis
+      </div>
+      <!-- Green Nodes for Factor Analysis -->
+      <div class="node green" style="width: 220px; top: 710px; left: 100px;" 
+           onclick="showInfo('Factor Analysis Basics', '&lt;ul&gt;&lt;li&gt;Models underlying latent variables as linear combinations of original features.&lt;/li&gt;&lt;/ul&gt;')">
+        Factor Analysis Basics
+      </div>
+      <div class="node green" style="width: 220px; top: 770px; left: 100px;" 
+           onclick="showInfo('Challenges in FA', '&lt;ul&gt;&lt;li&gt;Sensitive to correlations and interpretation is subjective.&lt;/li&gt;&lt;/ul&gt;')">
+        Challenges in FA
+      </div>
+      
     </div>
     
     <!-- Information Panel -->
     <div id="infoPanel">
       <div class="infoTitle" id="infoTitle">Click on a concept to see details</div>
       <div class="infoContent" id="infoContent">
-        Select any node in the mind map to display detailed information.
+        Select any node in the mind map to display detailed information about that concept.
+      </div>
+    </div>
+    
+    <!-- Legend -->
+    <div class="legend">
+      <div class="legendItem">
+        <div class="legendBox red"></div>
+        <span>Big Picture Concepts</span>
+      </div>
+      <div class="legendItem">
+        <div class="legendBox blue"></div>
+        <span>Major Categories</span>
+      </div>
+      <div class="legendItem">
+        <div class="legendBox green"></div>
+        <span>Components &amp; Details</span>
       </div>
     </div>
   </div>
