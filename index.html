@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feature Selection Mind Map</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f8f9fa;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .mindmap {
+      position: relative;
+      width: 1200px;
+      height: 850px;
+      margin: 20px 0;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .node {
+      position: absolute;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      transition: transform 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      font-weight: bold;
+    }
+    .node:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    /* Colors */
+    .red {
+      background-color: #ffcccc;
+      border: 2px solid #e60000;
+      color: #990000;
+    }
+    .blue {
+      background-color: #cce5ff;
+      border: 2px solid #0066cc;
+      color: #004080;
+    }
+    .green {
+      background-color: #ccffcc;
+      border: 2px solid #00cc00;
+      color: #006600;
+      font-weight: normal;
+    }
+    /* Info panel styles */
+    #infoPanel {
+      width: 1200px;
+      min-height: 150px;
+      padding: 15px;
+      margin-top: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: none;
+    }
+    .infoTitle {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+    }
+    .infoContent {
+      line-height: 1.5;
+    }
+    svg line {
+      stroke: #999;
+      stroke-width: 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Feature Selection in Dimensionality Reduction</h1>
+    <div class="mindmap" id="mindmap">
+      <!-- SVG for connecting lines -->
+      <svg width="1200" height="850" style="position: absolute; top: 0; left: 0;">
+        <!-- Main branches -->
+        <line x1="600" y1="400" x2="200" y2="150" />
+        <line x1="600" y1="400" x2="1000" y2="150" />
+        <line x1="600" y1="400" x2="200" y2="700" />
+        <line x1="600" y1="400" x2="1000" y2="700" />
+        
+        <!-- Sub-branches -->
+        <line x1="200" y1="150" x2="80" y2="60" />
+        <line x1="200" y1="150" x2="80" y2="230" />
+        <line x1="1000" y1="150" x2="920" y2="60" />
+        <line x1="1000" y1="150" x2="1080" y2="60" />
+        <line x1="1000" y1="150" x2="1000" y2="230" />
+        <line x1="200" y1="700" x2="80" y2="620" />
+        <line x1="200" y1="700" x2="80" y2="780" />
+        <line x1="1000" y1="700" x2="920" y2="620" />
+        <line x1="1000" y1="700" x2="1080" y2="620" />
+      </svg>
+      
+      <!-- Central Node -->
+      <div class="node red" style="width: 250px; top: 380px; left: 475px;"
+           onclick="showInfo('Feature Selection', '<ul><li>Process of selecting the most relevant features to improve model performance and interpretability.</li></ul>')">
+        Feature Selection
+      </div>
+      
+      <!-- Blue Nodes (Main Topics) -->
+      <div class="node blue" style="width: 250px; top: 120px; left: 120px;"
+           onclick="showInfo('Selection Methods', '<ul><li>Filter, Wrapper, and Embedded Methods.</li></ul>')">
+        Selection Methods
+      </div>
+      <div class="node blue" style="width: 250px; top: 120px; left: 880px;"
+           onclick="showInfo('Correlation & Pearson', '<ul><li>Measuring relationships between features.</li></ul>')">
+        Correlation & Pearson
+      </div>
+      <div class="node blue" style="width: 250px; top: 680px; left: 120px;"
+           onclick="showInfo('Simpson’s Paradox', '<ul><li>Explains misleading statistical conclusions.</li></ul>')">
+        Simpson’s Paradox
+      </div>
+      <div class="node blue" style="width: 250px; top: 680px; left: 880px;"
+           onclick="showInfo('Applications & Case Studies', '<ul><li>Real-world uses in health, psychology, and economics.</li></ul>')">
+        Applications & Case Studies
+      </div>
+      
+      <!-- Green Nodes (Details) -->
+      <div class="node green" style="width: 200px; top: 50px; left: 60px;"
+           onclick="showInfo('Filter Methods', '<ul><li>Use statistical scores (correlation, mutual information).</li></ul>')">
+        Filter Methods
+      </div>
+      <div class="node green" style="width: 200px; top: 200px; left: 60px;"
+           onclick="showInfo('Wrapper Methods', '<ul><li>Evaluate feature subsets using predictive models.</li></ul>')">
+        Wrapper Methods
+      </div>
+      <div class="node green" style="width: 200px; top: 50px; left: 1080px;"
+           onclick="showInfo('Pearson Correlation', '<ul><li>Measures linear relationship (-1 to +1 scale).</li></ul>')">
+        Pearson Correlation
+      </div>
+      <div class="node green" style="width: 200px; top: 200px; left: 1080px;"
+           onclick="showInfo('Causation vs Correlation', '<ul><li>Example: Ice cream sales and shark attacks.</li></ul>')">
+        Causation vs Correlation
+      </div>
+    </div>
+    
+    <!-- Information Panel -->
+    <div id="infoPanel">
+      <div class="infoTitle" id="infoTitle">Click on a concept to see details</div>
+      <div class="infoContent" id="infoContent">
+        Select any node in the mind map to display detailed information.
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function showInfo(title, content) {
+      document.getElementById("infoPanel").style.display = "block";
+      document.getElementById("infoTitle").textContent = title;
+      document.getElementById("infoContent").innerHTML = content;
+    }
+  </script>
+</body>
+</html>
